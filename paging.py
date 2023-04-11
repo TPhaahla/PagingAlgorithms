@@ -11,9 +11,7 @@ def FIFO(size, pages):
     allocation = []
 
     for i in range(len(pages)):
-        if(pages[i] in allocation):
-            continue
-        else:
+        if(pages[i] not in allocation):
             if(len(allocation)<frames):
                 allocation.append(pages[i])
                 faults+=1
@@ -30,7 +28,7 @@ def OPT():
 def main():
 
     # pages = None
-    # pages=[7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1]
+    pages=[7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1]
     # pages = [7,0,1,2,0,3,0,4,2,3,0,3,1,2,0]
 
 
