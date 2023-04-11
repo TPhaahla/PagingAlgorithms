@@ -65,6 +65,9 @@ def LRU(size, pages):
                     if allocation[k][1]<leastUsed:
 
                         leastPos = k
+                        leastUsed = allocation[k][1]
+                        # print(f"Least Used: {leastUsed}")
+                        # print(f"Least Position: {leastPos}")
                    
                 allocation[leastPos][0] = pages[i]
                 allocation[leastPos][1] = 0 
@@ -83,8 +86,9 @@ def OPT():
 def main():
 
     # pages = None
-    pages=[7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1]
+    # pages=[7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1]
     # pages = [7,0,1,2,0,3,0,4,2,3,0,3,1,2,0]
+    pages = [7,0,1,2,0,3,0,4,2,3,0,3,2]
 
 
     size = int(sys.argv[1])
