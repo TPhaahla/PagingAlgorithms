@@ -22,6 +22,61 @@ def FIFO(size, pages):
         # print(allocation)
     return faults
 
+def LRU(size, pages):
+
+    frames = size
+    faults = 0
+    allocation = []
+    
+    for i in range(len(pages)):
+        if(len(allocation)<frames):
+            for k in range(len(allocation)):
+                if(pages[i] == allocation[k][0]):
+                    allocation[k][1] = 0
+                    # print(allocation)
+                else:
+                    allocation[k][1] -=1
+                    # print(allocation)
+            else:
+                allocation.append([pages[i],0])
+                faults+=1
+                # print(allocation)
+                # for x in allocation:
+                #     print(x[0], end=" ")
+                # print()
+
+                
+        else: 
+            leastUsed = allocation[0][1]    
+            leastPos = 0
+            found = False  
+
+            for k in range(len(allocation)):
+                if(pages[i] == allocation[k][0]):
+                    allocation[k][1] = 0
+                    found = True
+                else:
+                    allocation[k][1] -=1
+            
+            if not found:
+
+                for k in range(len(allocation)):
+
+                    if allocation[k][1]<leastUsed:
+
+                        leastPos = k
+                   
+                allocation[leastPos][0] = pages[i]
+                allocation[leastPos][1] = 0 
+                faults+=1
+
+            # for x in allocation:
+            #     print(x[0], end=" ")
+            # print()
+            # print(allocation)
+    return faults
+
+
 def OPT():
     return 
 
@@ -34,7 +89,7 @@ def main():
 
     size = int(sys.argv[1])
     print(f'FIFO, {FIFO(size, pages)}, page faults.')
-    # print(f'LRU, {LRU(size, pages)}, page faults.')
+    print(f'LRU, {LRU(size, pages)}, page faults.')
     # print(f'OPT, {OPT(size, pages)}, page faults.')
 
 if __name__ == "__main__":
